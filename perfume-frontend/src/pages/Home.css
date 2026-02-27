@@ -1,0 +1,187 @@
+.home {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+}
+
+.home-hero {
+  text-align: center;
+  padding: 3rem 0 2rem;
+}
+
+.home-hero h1 {
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, #e94560, #ff6b6b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.home-hero p {
+  color: #888;
+  font-size: 1.1rem;
+}
+
+.home-filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.search-form {
+  display: flex;
+  flex: 1;
+  gap: 0.5rem;
+  min-width: 250px;
+}
+
+.search-form input {
+  flex: 1;
+  padding: 10px 16px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: #1a1a2e;
+  color: #eee;
+  font-size: 1rem;
+}
+
+.search-form input:focus {
+  outline: none;
+  border-color: #e94560;
+}
+
+.search-form button {
+  padding: 10px 24px;
+  background: #e94560;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.home-filters select {
+  padding: 10px 16px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: #1a1a2e;
+  color: #eee;
+  font-size: 1rem;
+  min-width: 160px;
+}
+
+.perfume-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.perfume-card {
+  background: #1a1a2e;
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+.perfume-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(233, 69, 96, 0.15);
+}
+
+.card-image {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  background: #16213e;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.concentration-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.concentration-extrait {
+  background: linear-gradient(135deg, #ffd700, #ff8c00);
+  color: #1a1a2e;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
+  animation: glow-extrait 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow-extrait {
+  from { box-shadow: 0 0 8px rgba(255, 215, 0, 0.4); }
+  to { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+}
+
+.concentration-edp {
+  background: #8e44ad;
+  color: #fff;
+}
+
+.concentration-edt {
+  background: #2980b9;
+  color: #fff;
+}
+
+.concentration-other {
+  background: #555;
+  color: #fff;
+}
+
+.card-body {
+  padding: 1rem 1.2rem 1.2rem;
+}
+
+.card-body h3 {
+  font-size: 1.1rem;
+  color: #eee;
+  margin-bottom: 0.3rem;
+}
+
+.card-brand {
+  color: #888;
+  font-size: 0.85rem;
+  margin-bottom: 0.8rem;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #e94560;
+}
+
+.card-audience {
+  font-size: 0.85rem;
+  color: #aaa;
+  text-transform: capitalize;
+}
+
+.loading, .empty {
+  text-align: center;
+  padding: 3rem;
+  color: #888;
+  font-size: 1.1rem;
+}

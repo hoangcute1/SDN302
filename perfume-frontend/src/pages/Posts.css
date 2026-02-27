@@ -1,0 +1,289 @@
+.posts-page {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+.posts-header {
+  margin-bottom: 2rem;
+}
+
+.posts-header h1 {
+  color: #eee;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
+.posts-header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.posts-search {
+  display: flex;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 200px;
+}
+
+.posts-search input {
+  flex: 1;
+  padding: 10px 16px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: #1a1a2e;
+  color: #eee;
+  font-size: 0.95rem;
+}
+
+.posts-search button {
+  padding: 10px 20px;
+  background: #e94560;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-create-post {
+  padding: 10px 24px;
+  background: #e94560;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.btn-create-post:hover {
+  background: #c73652;
+}
+
+/* Post cards */
+.posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.post-card {
+  background: #1a1a2e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+}
+
+.post-image {
+  width: 100%;
+  max-height: 300px;
+  overflow: hidden;
+}
+
+.post-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-body {
+  padding: 1.5rem;
+}
+
+.post-title {
+  color: #eee;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-meta {
+  display: flex;
+  gap: 1rem;
+  color: #888;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.post-author {
+  color: #e94560;
+  font-weight: 500;
+}
+
+.post-perfume-tag {
+  display: inline-block;
+  background: #16213e;
+  color: #e94560;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  margin-bottom: 0.75rem;
+}
+
+.post-content {
+  color: #ccc;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  margin-bottom: 1rem;
+}
+
+.post-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.tag {
+  background: #0f3460;
+  color: #7ec8e3;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+.post-actions {
+  display: flex;
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #222;
+}
+
+.post-actions .btn-edit {
+  padding: 6px 16px;
+  background: #0f3460;
+  color: #eee;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.post-actions .btn-edit:hover {
+  background: #1a4a8a;
+}
+
+.btn-delete-post {
+  padding: 6px 16px;
+  background: #5c1a1a;
+  color: #ff6b6b;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.btn-delete-post:hover {
+  background: #7a2020;
+}
+
+/* Loading & Empty */
+.posts-page .loading,
+.posts-page .empty {
+  text-align: center;
+  color: #888;
+  padding: 3rem;
+  font-size: 1.1rem;
+}
+
+/* Modal reuse from Admin.css */
+.posts-page .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.posts-page .modal-content {
+  background: #16213e;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.posts-page .modal-content h2 {
+  color: #eee;
+  margin-bottom: 1rem;
+}
+
+.posts-page .modal-content label {
+  display: block;
+  color: #aaa;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+  margin-top: 0.75rem;
+}
+
+.posts-page .modal-content input,
+.posts-page .modal-content select,
+.posts-page .modal-content textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  background: #1a1a2e;
+  color: #eee;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+.posts-page .modal-content textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.posts-page .modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.posts-page .btn-cancel {
+  padding: 10px 20px;
+  background: #333;
+  color: #ccc;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.posts-page .btn-save {
+  padding: 10px 24px;
+  background: #e94560;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.posts-page .btn-save:hover {
+  background: #c73652;
+}
+
+.posts-page .admin-error {
+  background: #5c1a1a;
+  color: #ff6b6b;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}

@@ -1,0 +1,320 @@
+.perfume-detail {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.back-link {
+  color: #e94560;
+  text-decoration: none;
+  font-size: 0.95rem;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+.detail-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+.detail-image {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #1a1a2e;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.3);
+}
+
+.detail-image img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.detail-brand {
+  color: #888;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.3rem;
+}
+
+.detail-info h1 {
+  font-size: 2rem;
+  color: #eee;
+  margin-bottom: 1rem;
+}
+
+.detail-tags {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.detail-tags span {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.tag-concentration {
+  background: #333;
+  color: #fff;
+}
+
+.detail-extrait {
+  background: linear-gradient(135deg, #ffd700, #ff8c00) !important;
+  color: #1a1a2e !important;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
+  animation: glow-extrait 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow-extrait {
+  from { box-shadow: 0 0 8px rgba(255, 215, 0, 0.4); }
+  to { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+}
+
+.detail-edp {
+  background: #8e44ad !important;
+}
+
+.detail-edt {
+  background: #2980b9 !important;
+}
+
+.tag-audience {
+  background: #16213e;
+  color: #c4c4c4;
+  text-transform: capitalize;
+}
+
+.tag-volume {
+  background: #16213e;
+  color: #c4c4c4;
+}
+
+.detail-price {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #e94560;
+  margin-bottom: 1.5rem;
+}
+
+.detail-section {
+  margin-bottom: 1.2rem;
+}
+
+.detail-section h3 {
+  color: #e94560;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.detail-section p {
+  color: #bbb;
+  line-height: 1.6;
+}
+
+/* Comments */
+.comments-section {
+  background: #1a1a2e;
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.comments-section h2 {
+  color: #eee;
+  margin-bottom: 1.5rem;
+}
+
+.comment-form {
+  background: #16213e;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.comment-form h3 {
+  color: #eee;
+  margin-bottom: 1rem;
+}
+
+.comment-error {
+  background: rgba(233, 69, 96, 0.15);
+  color: #e94560;
+  padding: 8px;
+  border-radius: 6px;
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+}
+
+.rating-input {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.rating-input label {
+  color: #aaa;
+}
+
+.star-rating {
+  display: flex;
+  gap: 4px;
+}
+
+.star-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #555;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.star-btn.active {
+  color: #ffd700;
+}
+
+.comment-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background: #1a1a2e;
+  color: #eee;
+  font-size: 1rem;
+  min-height: 80px;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.comment-form button[type="submit"] {
+  margin-top: 0.8rem;
+  padding: 10px 24px;
+  background: #e94560;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.login-prompt {
+  color: #888;
+  margin-bottom: 1.5rem;
+}
+
+.login-prompt a {
+  color: #e94560;
+}
+
+.already-reviewed {
+  color: #888;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.comment-card {
+  background: #16213e;
+  padding: 1.2rem;
+  border-radius: 8px;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.comment-header strong {
+  color: #eee;
+}
+
+.comment-stars {
+  color: #ffd700;
+  font-size: 1.1rem;
+}
+
+.comment-content {
+  color: #bbb;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.comment-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.comment-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.comment-actions button {
+  background: none;
+  border: 1px solid #555;
+  color: #aaa;
+  padding: 3px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.comment-actions .btn-delete {
+  border-color: #e94560;
+  color: #e94560;
+}
+
+.comment-edit-form textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background: #1a1a2e;
+  color: #eee;
+  margin: 0.5rem 0;
+  box-sizing: border-box;
+}
+
+.comment-edit-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.comment-edit-actions button {
+  padding: 5px 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  background: #e94560;
+  color: #fff;
+}
+
+.comment-edit-actions .btn-cancel {
+  background: #555;
+}
+
+@media (max-width: 768px) {
+  .detail-main {
+    grid-template-columns: 1fr;
+  }
+}
