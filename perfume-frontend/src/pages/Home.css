@@ -1,187 +1,274 @@
 .home {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1.5rem 3rem;
+  padding: 0 1.5rem 4rem;
 }
 
 .home-hero {
   text-align: center;
-  padding: 3rem 0 2rem;
+  padding: 4rem 0 3rem;
 }
 
 .home-hero h1 {
-  font-size: 2.5rem;
-  background: linear-gradient(135deg, #e94560, #ff6b6b);
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff 30%, #e94560 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
+  letter-spacing: -1px;
 }
 
 .home-hero p {
-  color: #888;
-  font-size: 1.1rem;
+  color: #666;
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .home-filters {
   display: flex;
   gap: 1rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
+  margin-bottom: 3rem;
+  background: rgba(26, 26, 46, 0.5);
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .search-form {
   display: flex;
+  flex: 2;
+  gap: 0.8rem;
+}
+
+.search-input-wrapper {
+  position: relative;
   flex: 1;
-  gap: 0.5rem;
-  min-width: 250px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: #555;
+  pointer-events: none;
 }
 
 .search-form input {
-  flex: 1;
-  padding: 10px 16px;
-  border: 1px solid #333;
-  border-radius: 8px;
-  background: #1a1a2e;
-  color: #eee;
-  font-size: 1rem;
+  width: 100%;
+  padding: 12px 20px 12px 45px;
+  border: 1px solid #222;
+  border-radius: 12px;
+  background: #0d0d1f;
+  color: #fff;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+  outline: none;
 }
 
 .search-form input:focus {
-  outline: none;
   border-color: #e94560;
+  box-shadow: 0 0 0 4px rgba(233, 69, 96, 0.1);
 }
 
-.search-form button {
-  padding: 10px 24px;
-  background: #e94560;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
+.filter-select-wrapper {
+  flex: 1;
+  max-width: 250px;
 }
 
 .home-filters select {
-  padding: 10px 16px;
-  border: 1px solid #333;
-  border-radius: 8px;
-  background: #1a1a2e;
-  color: #eee;
-  font-size: 1rem;
-  min-width: 160px;
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #222;
+  border-radius: 12px;
+  background: #0d0d1f;
+  color: #fff;
+  font-size: 0.95rem;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.home-filters select:focus {
+  border-color: #e94560;
+  box-shadow: 0 0 0 4px rgba(233, 69, 96, 0.1);
 }
 
 .perfume-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .perfume-card {
-  background: #1a1a2e;
-  border-radius: 12px;
+  background: #16162d;
+  border-radius: 20px;
   overflow: hidden;
-  text-decoration: none;
-  color: inherit;
-  transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  position: relative;
 }
 
 .perfume-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 28px rgba(233, 69, 96, 0.15);
+  transform: translateY(-8px);
+  border-color: rgba(233, 69, 96, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(233, 69, 96, 0.1);
 }
 
 .card-image {
   position: relative;
-  height: 220px;
-  overflow: hidden;
-  background: #16213e;
+  height: 280px;
+  background: #0a0a1a;
 }
 
 .card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.perfume-card:hover .card-image img {
+  transform: scale(1.05);
 }
 
 .concentration-badge {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 4px 10px;
-  border-radius: 20px;
+  top: 15px;
+  right: 15px;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  backdrop-filter: blur(8px);
+  z-index: 2;
+}
+
+.concentration-extrait {
+  background: linear-gradient(135deg, #ffd700, #ff8c00, #ffd700);
+  background-size: 200% auto;
+  color: #000;
+  animation: shimmer 3s linear infinite, pulse-glow 2s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.crown-icon {
+  font-size: 0.8rem;
+}
+
+.concentration-edp {
+  background: rgba(142, 68, 173, 0.85);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.concentration-edt {
+  background: rgba(41, 128, 185, 0.85);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.card-brand {
+  color: #e94560;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-.concentration-extrait {
-  background: linear-gradient(135deg, #ffd700, #ff8c00);
-  color: #1a1a2e;
-  box-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
-  animation: glow-extrait 2s ease-in-out infinite alternate;
-}
-
-@keyframes glow-extrait {
-  from { box-shadow: 0 0 8px rgba(255, 215, 0, 0.4); }
-  to { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
-}
-
-.concentration-edp {
-  background: #8e44ad;
-  color: #fff;
-}
-
-.concentration-edt {
-  background: #2980b9;
-  color: #fff;
-}
-
-.concentration-other {
-  background: #555;
-  color: #fff;
-}
-
-.card-body {
-  padding: 1rem 1.2rem 1.2rem;
+.card-audience {
+  color: #555;
+  font-size: 1.1rem;
 }
 
 .card-body h3 {
-  font-size: 1.1rem;
-  color: #eee;
-  margin-bottom: 0.3rem;
+  font-size: 1.25rem;
+  color: #fff;
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.card-brand {
-  color: #888;
+.card-rating {
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stars {
+  color: #ffd700;
+  letter-spacing: 2px;
+  font-size: 1rem;
+}
+
+.rating-count {
+  color: #555;
   font-size: 0.85rem;
-  margin-bottom: 0.8rem;
+}
+
+.no-rating {
+  color: #444;
+  font-size: 0.8rem;
+  font-style: italic;
 }
 
 .card-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .card-price {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #e94560;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
 }
 
-.card-audience {
+.view-detail {
   font-size: 0.85rem;
-  color: #aaa;
-  text-transform: capitalize;
+  color: #e94560;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s;
 }
 
-.loading, .empty {
-  text-align: center;
-  padding: 3rem;
-  color: #888;
-  font-size: 1.1rem;
+.perfume-card:hover .view-detail {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 600px) {
+  .home-filters {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .search-form {
+    flex-direction: column;
+  }
 }

@@ -71,29 +71,31 @@ export default function AdminBrands() {
         <button onClick={openCreate}>+ Add Brand</button>
       </h1>
 
-      <table className="admin-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Brand Name</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {brands.map((b, i) => (
-            <tr key={b._id}>
-              <td>{i + 1}</td>
-              <td>{b.brandName}</td>
-              <td>
-                <div className="admin-actions">
-                  <button className="btn-edit" onClick={() => openEdit(b)}>Edit</button>
-                  <button className="btn-delete-admin" onClick={() => handleDelete(b._id)}>Delete</button>
-                </div>
-              </td>
+      <div className="admin-table-container">
+        <table className="admin-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Brand Name</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {brands.map((b, i) => (
+              <tr key={b._id}>
+                <td>{i + 1}</td>
+                <td>{b.brandName}</td>
+                <td>
+                  <div className="admin-actions">
+                    <button className="btn-edit" onClick={() => openEdit(b)}>Edit</button>
+                    <button className="btn-delete-admin" onClick={() => handleDelete(b._id)}>Delete</button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       {showModal && (
         <div className="modal-overlay" onClick={() => setShowModal(false)}>

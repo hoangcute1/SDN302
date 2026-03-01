@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../context/AuthContext";
 import api from "../api";
+import API_BASE from "../config";
 import "./Posts.css";
 
 interface Author {
@@ -50,6 +51,9 @@ export default function Posts() {
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
+  const [uploading, setUploading] = useState(false);
+  const [imagePreview, setImagePreview] = useState("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const fetchPosts = async () => {
     setLoading(true);
@@ -83,6 +87,7 @@ export default function Posts() {
     setEditing(null);
     setForm({ ...emptyForm });
     setError("");
+    setImagePreview("");
     setShowModal(true);
   };
 
@@ -96,6 +101,7 @@ export default function Posts() {
       tags: post.tags.join(", "),
     });
     setError("");
+    setImagePreview(post.image || "");
     setShowModal(true);
   };
 
@@ -135,6 +141,41 @@ export default function Posts() {
     }
   };
 
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    setError("");
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      const res = await api.post("/upload", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      const imageUrl = `${API_BASE}${res.data.url}`;
+      setForm((prev) => ({ ...prev, image: imageUrl }));
+      setImagePreview(imageUrl);
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Failed to upload image");
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleImageUrlChange = (url: string) => {
+    setForm((prev) => ({ ...prev, image: url }));
+    setImagePreview(url);
+  };
+
+  const getImageSrc = (image: string) => {
+    if (!image) return "";
+    if (image.startsWith("http")) return image;
+    return `${API_BASE}${image}`;
+  };
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     fetchPosts();
@@ -156,75 +197,63 @@ export default function Posts() {
   };
 
   return (
-    <div className="posts-page">
-      <div className="posts-header">
-        <h1>Blog Posts</h1>
-        <div className="posts-header-actions">
-          <form onSubmit={handleSearch} className="posts-search">
-            <input
-              type="text"
-              placeholder="Search posts..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <button type="submit">Search</button>
-          </form>
-          {member && (
-            <button className="btn-create-post" onClick={openCreate}>
-              + New Post
-            </button>
-          )}
-        </div>
+    <div className="posts-page fade-in">
+      <h1>Perfume Community</h1>
+
+      <div className="posts-header-actions">
+        <form onSubmit={handleSearch} className="posts-search">
+          <input
+            type="text"
+            placeholder="Search posts..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <button type="submit">Search</button>
+        </form>
+        {member && (
+          <button className="btn-create-post" onClick={openCreate}>
+            + New Post
+          </button>
+        )}
       </div>
 
       {loading ? (
-        <div className="loading">Loading posts...</div>
+        <div className="loading">
+          <div className="spinner"></div>
+          <span>Loading community posts...</span>
+        </div>
       ) : posts.length === 0 ? (
         <div className="empty">No posts yet. Be the first to share!</div>
       ) : (
         <div className="posts-list">
           {posts.map((post) => (
-            <div className="post-card" key={post._id}>
-              {post.image && (
-                <div className="post-image">
-                  <img src={post.image} alt={post.title} />
-                </div>
-              )}
-              <div className="post-body">
-                <h2 className="post-title">{post.title}</h2>
-                <div className="post-meta">
-                  <span className="post-author">By {post.author?.name}</span>
-                  <span className="post-date">{formatDate(post.createdAt)}</span>
-                </div>
-                {post.perfume && (
-                  <div className="post-perfume-tag">
-                    🌸 Related: {post.perfume.perfumeName}
-                  </div>
-                )}
-                <p className="post-content">{post.content}</p>
-                {post.tags.length > 0 && (
-                  <div className="post-tags">
-                    {post.tags.map((tag, i) => (
-                      <span key={i} className="tag">
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
+            <div className="post-card fade-in" key={post._id}>
+              <div className="post-header">
+                <h3>{post.title}</h3>
                 {canEditDelete(post) && (
                   <div className="post-actions">
-                    <button className="btn-edit" onClick={() => openEdit(post)}>
-                      Edit
-                    </button>
-                    <button
-                      className="btn-delete-post"
-                      onClick={() => handleDelete(post._id)}
-                    >
-                      Delete
-                    </button>
+                    <button className="btn-edit" onClick={() => openEdit(post)}>Edit</button>
+                    <button className="btn-delete-post" onClick={() => handleDelete(post._id)}>Delete</button>
                   </div>
                 )}
               </div>
+              <div className="post-meta">
+                By <strong>{post.author?.name}</strong> • {new Date(post.createdAt).toLocaleDateString()}
+                {post.perfume && <span className="post-perfume-tag">🌸 {post.perfume.perfumeName}</span>}
+              </div>
+              {post.image && (
+                <div className="post-image">
+                  <img src={getImageSrc(post.image)} alt={post.title} />
+                </div>
+              )}
+              <p className="post-content">{post.content}</p>
+              {post.tags?.length > 0 && (
+                <div className="post-tags">
+                  {post.tags.map((tag, i) => (
+                    <span key={i} className="post-tag-item">#{tag}</span>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -251,12 +280,57 @@ export default function Posts() {
               placeholder="Write your post content..."
             />
 
-            <label>Image URL (optional)</label>
-            <input
-              value={form.image}
-              onChange={(e) => setForm({ ...form, image: e.target.value })}
-              placeholder="https://example.com/image.jpg"
-            />
+            <label>Image (optional)</label>
+            <div className="image-upload-section">
+              <div className="image-url-row">
+                <input
+                  value={form.image}
+                  onChange={(e) => handleImageUrlChange(e.target.value)}
+                  placeholder="Paste image URL here..."
+                />
+                <span className="image-or">or</span>
+                <button
+                  type="button"
+                  className="btn-upload-file"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploading}
+                >
+                  {uploading ? "Uploading..." : "📁 Upload"}
+                </button>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileUpload}
+                  style={{ display: "none" }}
+                />
+              </div>
+              {imagePreview && (
+                <div className="image-preview">
+                  <img
+                    src={getImageSrc(imagePreview)}
+                    alt="Preview"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).style.display = "none";
+                    }}
+                    onLoad={(e) => {
+                      (e.target as HTMLImageElement).style.display = "block";
+                    }}
+                  />
+                  <button
+                    type="button"
+                    className="btn-remove-image"
+                    onClick={() => {
+                      setForm((prev) => ({ ...prev, image: "" }));
+                      setImagePreview("");
+                      if (fileInputRef.current) fileInputRef.current.value = "";
+                    }}
+                  >
+                    ✕ Remove
+                  </button>
+                </div>
+              )}
+            </div>
 
             <label>Related Perfume (optional)</label>
             <select
@@ -279,9 +353,7 @@ export default function Posts() {
             />
 
             <div className="modal-actions">
-              <button className="btn-cancel" onClick={() => setShowModal(false)}>
-                Cancel
-              </button>
+              <button className="btn-cancel" onClick={() => setShowModal(false)}>Cancel</button>
               <button className="btn-save" onClick={handleSave}>
                 {editing ? "Update" : "Publish"}
               </button>

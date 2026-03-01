@@ -1,79 +1,107 @@
 .admin-page {
-  max-width: 1100px;
-  margin: 2rem auto;
-  padding: 0 1.5rem;
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 0 1.5rem 5rem;
 }
 
 .admin-page h1 {
-  color: #eee;
-  margin-bottom: 1.5rem;
+  color: #fff;
+  margin-bottom: 2.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-size: 2rem;
+  font-weight: 800;
 }
 
 .admin-page h1 button {
-  padding: 8px 20px;
+  padding: 12px 24px;
   background: #e94560;
   color: #fff;
   border: none;
-  border-radius: 6px;
+  border-radius: 10px;
   cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.95rem;
+  font-weight: 700;
+  transition: all 0.3s;
+}
+
+.admin-page h1 button:hover {
+  background: #ff5e78;
+  transform: translateY(-2px);
+}
+
+.admin-table-container {
+  background: #16162d;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
 }
 
 .admin-table {
   width: 100%;
   border-collapse: collapse;
-  background: #1a1a2e;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
 }
 
 .admin-table th {
-  background: #16213e;
+  background: #0d0d1f;
   color: #e94560;
-  padding: 12px 16px;
+  padding: 1.2rem 1.5rem;
   text-align: left;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1.5px;
+  font-weight: 800;
 }
 
 .admin-table td {
-  padding: 12px 16px;
+  padding: 1.2rem 1.5rem;
   color: #ccc;
-  border-top: 1px solid #222;
+  border-top: 1px solid rgba(255, 255, 255, 0.02);
   font-size: 0.95rem;
 }
 
+.admin-table tr {
+  transition: background 0.2s;
+}
+
 .admin-table tr:hover {
-  background: rgba(233, 69, 96, 0.05);
+  background: rgba(233, 69, 96, 0.03);
 }
 
 .admin-actions {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.6rem;
 }
 
 .admin-actions button {
-  padding: 5px 12px;
+  padding: 6px 14px;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 700;
+  transition: all 0.2s;
 }
 
 .btn-edit {
-  background: #2980b9;
+  background: #1a4a8a;
+  color: #7ec8e3;
+}
+
+.btn-edit:hover {
+  background: #2361b5;
   color: #fff;
 }
 
 .btn-delete-admin {
-  background: #c0392b;
+  background: #5c1a1a;
+  color: #ff6b6b;
+}
+
+.btn-delete-admin:hover {
+  background: #7a2020;
   color: #fff;
 }
 
@@ -84,107 +112,127 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 200;
+  padding: 1rem;
 }
 
 .modal-content {
-  background: #1a1a2e;
-  padding: 2rem;
-  border-radius: 12px;
+  background: #16162d;
+  padding: 3rem;
+  border-radius: 24px;
   width: 100%;
-  max-width: 500px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  max-width: 550px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
 }
 
 .modal-content h2 {
-  color: #e94560;
-  margin-bottom: 1.2rem;
+  color: #fff;
+  margin-bottom: 2rem;
+  font-weight: 800;
 }
 
 .modal-content label {
   display: block;
-  margin-top: 0.8rem;
-  margin-bottom: 0.3rem;
-  color: #aaa;
-  font-size: 0.85rem;
+  margin-top: 1.2rem;
+  margin-bottom: 0.4rem;
+  color: #555;
+  font-size: 0.75rem;
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .modal-content input,
 .modal-content select,
 .modal-content textarea {
   width: 100%;
-  padding: 10px 14px;
-  border: 1px solid #333;
-  border-radius: 6px;
-  background: #16213e;
+  padding: 12px 16px;
+  border: 1px solid #222;
+  border-radius: 10px;
+  background: #0d0d1f;
   color: #eee;
   font-size: 1rem;
   box-sizing: border-box;
 }
 
 .modal-content textarea {
-  min-height: 80px;
+  min-height: 120px;
   resize: vertical;
 }
 
-.modal-content input:focus,
-.modal-content select:focus,
-.modal-content textarea:focus {
+.modal-content input:focus {
   outline: none;
   border-color: #e94560;
 }
 
 .modal-actions {
   display: flex;
-  gap: 0.8rem;
-  margin-top: 1.5rem;
+  gap: 1rem;
+  margin-top: 2.5rem;
 }
 
 .modal-actions button {
   flex: 1;
-  padding: 10px;
+  padding: 14px;
   border: none;
-  border-radius: 6px;
-  font-weight: 600;
+  border-radius: 10px;
+  font-weight: 700;
   cursor: pointer;
   font-size: 1rem;
+  transition: all 0.3s;
 }
 
-.modal-actions .btn-save {
+.btn-save {
   background: #e94560;
   color: #fff;
 }
 
-.modal-actions .btn-cancel-modal {
+.btn-cancel-modal {
   background: #333;
   color: #ccc;
 }
 
 .admin-error {
-  background: rgba(233, 69, 96, 0.15);
+  background: rgba(233, 69, 96, 0.1);
   color: #e94560;
-  padding: 10px;
-  border-radius: 6px;
-  margin-bottom: 1rem;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(233, 69, 96, 0.2);
 }
 
 .badge-yes {
-  background: #2ecc71;
-  color: #fff;
-  padding: 2px 8px;
-  border-radius: 4px;
+  background: rgba(46, 204, 113, 0.15);
+  color: #2ecc71;
+  padding: 4px 12px;
+  border-radius: 20px;
   font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid rgba(46, 204, 113, 0.3);
 }
 
 .badge-no {
-  background: #555;
-  color: #aaa;
-  padding: 2px 8px;
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #666;
+  padding: 4px 12px;
+  border-radius: 20px;
   font-size: 0.75rem;
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+
+  .admin-table th:nth-child(4),
+  .admin-table td:nth-child(4) {
+    display: none;
+  }
 }

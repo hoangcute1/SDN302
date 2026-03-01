@@ -27,9 +27,13 @@ export default function Register() {
   };
 
   return (
-    <div className="auth-container">
+    <div className="auth-container fade-in">
       <form className="auth-form" onSubmit={handleSubmit}>
-        <h2>Register</h2>
+        <div className="auth-brand">
+          <span className="auth-logo">🌸</span>
+          <h2>Create Account</h2>
+          <p>Join our exclusive community</p>
+        </div>
         {error && <div className="auth-error">{error}</div>}
         <label>Full Name</label>
         <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required />

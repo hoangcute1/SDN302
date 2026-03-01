@@ -93,6 +93,14 @@ export default function PerfumeDetail() {
     }
   };
 
+  const avgRating = perfume?.comments && perfume.comments.length > 0
+    ? (perfume.comments.reduce((acc, c) => acc + c.rating, 0) / perfume.comments.length).toFixed(1)
+    : null;
+
+  const countStars = (rating: number) => {
+    return Math.round(rating);
+  };
+
   const getConcentrationClass = (c: string) => {
     const lower = c.toLowerCase();
     if (lower === "extrait") return "detail-extrait";
@@ -113,19 +121,34 @@ export default function PerfumeDetail() {
           <img src={perfume.uri} alt={perfume.perfumeName} />
         </div>
 
-        <div className="detail-info">
+        <div className="detail-info fade-in">
           <div className="detail-brand">{perfume.brand?.brandName}</div>
           <h1>{perfume.perfumeName}</h1>
 
+          {avgRating && (
+            <div className="detail-avg-rating">
+              <span className="stars">
+                {"★".repeat(countStars(+avgRating))}
+                {"☆".repeat(3 - countStars(+avgRating))}
+              </span>
+              <span className="rating-num">{avgRating} / 3.0</span>
+              <span className="rating-sep">•</span>
+              <span className="rating-count">{perfume.comments.length} reviews</span>
+            </div>
+          )}
+
           <div className="detail-tags">
-            <span className={`tag-concentration ${getConcentrationClass(perfume.concentration)}`}>
+            <div className={`tag-concentration ${getConcentrationClass(perfume.concentration)}`}>
+              {perfume.concentration.toLowerCase() === "extrait" && <span className="crown-icon">👑</span>}
               {perfume.concentration}
-            </span>
+            </div>
             <span className="tag-audience">{perfume.targetAudience}</span>
             <span className="tag-volume">{perfume.volume}ml</span>
           </div>
 
           <div className="detail-price">${perfume.price}</div>
+
+          <div className="detail-divider"></div>
 
           <div className="detail-section">
             <h3>Description</h3>
@@ -133,8 +156,8 @@ export default function PerfumeDetail() {
           </div>
 
           <div className="detail-section">
-            <h3>Ingredients</h3>
-            <p>{perfume.ingredients}</p>
+            <h3>Key Ingredients</h3>
+            <p className="ingredients-text">{perfume.ingredients}</p>
           </div>
         </div>
       </div>

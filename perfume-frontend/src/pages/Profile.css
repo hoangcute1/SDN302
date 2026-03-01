@@ -1,58 +1,99 @@
 .profile-container {
   max-width: 900px;
-  margin: 2rem auto;
-  padding: 0 1.5rem;
+  margin: 3rem auto;
+  padding: 0 1.5rem 5rem;
+}
+
+.profile-hero {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, #e94560, #c0392b);
+  border-radius: 50%;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: 800;
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+}
+
+.profile-hero h1 {
+  font-size: 2.2rem;
+  color: #eee;
+  margin-bottom: 0.5rem;
+}
+
+.profile-hero p {
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.profile-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.2fr 0.8fr;
   gap: 2rem;
 }
 
 .profile-card {
-  background: #1a1a2e;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  background: #16162d;
+  padding: 2.5rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
-.profile-card h2 {
-  color: #e94560;
-  margin-bottom: 0.5rem;
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
 }
 
-.profile-email {
-  color: #888;
-  margin-bottom: 0.5rem;
+.card-title .icon {
+  font-size: 1.5rem;
 }
 
-.badge-admin-profile {
-  background: #e94560;
-  color: #fff;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  display: inline-block;
-  margin-bottom: 1rem;
+.card-title h2 {
+  font-size: 1.3rem;
+  color: #eee;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
 .profile-card label {
   display: block;
-  margin-top: 0.8rem;
-  margin-bottom: 0.3rem;
-  color: #aaa;
-  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  color: #555;
+  font-size: 0.75rem;
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .profile-card input,
 .profile-card select {
   width: 100%;
-  padding: 10px 14px;
-  border: 1px solid #333;
-  border-radius: 6px;
-  background: #16213e;
+  padding: 12px 16px;
+  background: #0d0d1f;
+  border: 1px solid #222;
+  border-radius: 10px;
   color: #eee;
-  font-size: 1rem;
-  box-sizing: border-box;
+  font-size: 0.95rem;
+  transition: all 0.3s;
 }
 
 .profile-card input:focus {
@@ -60,44 +101,52 @@
   border-color: #e94560;
 }
 
-.profile-card button {
+.btn-primary {
   width: 100%;
-  margin-top: 1.5rem;
-  padding: 10px;
+  margin-top: 1rem;
+  padding: 12px;
   background: #e94560;
   color: #fff;
   border: none;
-  border-radius: 6px;
-  font-weight: 600;
+  border-radius: 10px;
+  font-weight: 700;
   cursor: pointer;
 }
 
-.profile-card button:hover {
-  opacity: 0.9;
+.btn-outline {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 12px;
+  background: transparent;
+  color: #e94560;
+  border: 1px solid #e94560;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .profile-success {
-  background: rgba(46, 204, 113, 0.15);
+  background: rgba(46, 204, 113, 0.1);
   color: #2ecc71;
-  padding: 8px;
-  border-radius: 6px;
+  padding: 12px;
+  border-radius: 10px;
   text-align: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
   font-size: 0.9rem;
 }
 
 .profile-error {
-  background: rgba(233, 69, 96, 0.15);
+  background: rgba(233, 69, 96, 0.1);
   color: #e94560;
-  padding: 8px;
-  border-radius: 6px;
+  padding: 12px;
+  border-radius: 10px;
   text-align: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
   font-size: 0.9rem;
 }
 
-@media (max-width: 768px) {
-  .profile-container {
+@media (max-width: 800px) {
+  .profile-grid {
     grid-template-columns: 1fr;
   }
 }

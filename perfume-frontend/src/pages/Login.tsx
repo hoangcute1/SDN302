@@ -28,9 +28,13 @@ export default function Login() {
   };
 
   return (
-    <div className="auth-container">
+    <div className="auth-container fade-in">
       <form className="auth-form" onSubmit={handleSubmit}>
-        <h2>Login</h2>
+        <div className="auth-brand">
+          <span className="auth-logo">🌸</span>
+          <h2>Welcome Back</h2>
+          <p>Sign in to your account</p>
+        </div>
         {error && <div className="auth-error">{error}</div>}
         <label>Email</label>
         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />

@@ -8,6 +8,10 @@ interface Brand {
   brandName: string;
 }
 
+interface Comment {
+  rating: number;
+}
+
 interface Perfume {
   _id: string;
   perfumeName: string;
@@ -16,6 +20,7 @@ interface Perfume {
   concentration: string;
   targetAudience: string;
   brand: Brand;
+  comments: Comment[];
 }
 
 export default function Home() {
@@ -53,11 +58,15 @@ export default function Home() {
     fetchBrands();
   }, []);
 
+  // Live search and filter
   useEffect(() => {
-    fetchPerfumes();
-  }, [brandFilter]);
+    const timeout = setTimeout(() => {
+      fetchPerfumes();
+    }, 300); // 300ms debounce
+    return () => clearTimeout(timeout);
+  }, [search, brandFilter]);
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     fetchPerfumes();
   };
@@ -84,21 +93,25 @@ export default function Home() {
       </div>
 
       <div className="home-filters">
-        <form onSubmit={handleSearch} className="search-form">
-          <input
-            type="text"
-            placeholder="Search perfumes..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <button type="submit">Search</button>
+        <form onSubmit={handleSearchSubmit} className="search-form">
+          <div className="search-input-wrapper">
+            <span className="search-icon">🔍</span>
+            <input
+              type="text"
+              placeholder="Search by perfume name..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
         </form>
-        <select value={brandFilter} onChange={(e) => setBrandFilter(e.target.value)}>
-          <option value="">All Brands</option>
-          {brands.map((b) => (
-            <option key={b._id} value={b._id}>{b.brandName}</option>
-          ))}
-        </select>
+        <div className="filter-select-wrapper">
+          <select value={brandFilter} onChange={(e) => setBrandFilter(e.target.value)}>
+            <option value="">All Brands</option>
+            {brands.map((b) => (
+              <option key={b._id} value={b._id}>{b.brandName}</option>
+            ))}
+          </select>
+        </div>
       </div>
 
       {loading ? (
@@ -108,19 +121,38 @@ export default function Home() {
       ) : (
         <div className="perfume-grid">
           {perfumes.map((p) => (
-            <Link to={`/perfumes/${p._id}`} key={p._id} className="perfume-card">
+            <Link to={`/perfumes/${p._id}`} key={p._id} className="perfume-card fade-in">
               <div className="card-image">
-                <img src={p.uri} alt={p.perfumeName} />
-                <span className={`concentration-badge ${getConcentrationClass(p.concentration)}`}>
+                <img src={p.uri} alt={p.perfumeName} loading="lazy" />
+                <div className={`concentration-badge ${getConcentrationClass(p.concentration)}`}>
+                  {p.concentration.toLowerCase() === "extrait" && <span className="crown-icon">👑</span>}
                   {p.concentration}
-                </span>
+                </div>
               </div>
               <div className="card-body">
+                <div className="card-header-row">
+                  <p className="card-brand">{p.brand?.brandName}</p>
+                  <span className="card-audience">{getAudienceIcon(p.targetAudience)}</span>
+                </div>
                 <h3>{p.perfumeName}</h3>
-                <p className="card-brand">{p.brand?.brandName}</p>
+
+                <div className="card-rating">
+                  {p.comments && p.comments.length > 0 ? (
+                    <>
+                      <span className="stars">
+                        {"★".repeat(Math.round(p.comments.reduce((acc, c) => acc + c.rating, 0) / p.comments.length))}
+                        {"☆".repeat(3 - Math.round(p.comments.reduce((acc, c) => acc + c.rating, 0) / p.comments.length))}
+                      </span>
+                      <span className="rating-count">({p.comments.length})</span>
+                    </>
+                  ) : (
+                    <span className="no-rating">No reviews yet</span>
+                  )}
+                </div>
+
                 <div className="card-footer">
                   <span className="card-price">${p.price}</span>
-                  <span className="card-audience">{getAudienceIcon(p.targetAudience)} {p.targetAudience}</span>
+                  <span className="view-detail">View Details →</span>
                 </div>
               </div>
             </Link>

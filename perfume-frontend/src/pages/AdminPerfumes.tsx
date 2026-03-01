@@ -119,37 +119,39 @@ export default function AdminPerfumes() {
         <button onClick={openCreate}>+ Add Perfume</button>
       </h1>
 
-      <table className="admin-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Brand</th>
-            <th>Price</th>
-            <th>Concentration</th>
-            <th>Volume</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {perfumes.map((p, i) => (
-            <tr key={p._id}>
-              <td>{i + 1}</td>
-              <td>{p.perfumeName}</td>
-              <td>{p.brand?.brandName}</td>
-              <td>${p.price}</td>
-              <td>{p.concentration}</td>
-              <td>{p.volume}ml</td>
-              <td>
-                <div className="admin-actions">
-                  <button className="btn-edit" onClick={() => openEdit(p)}>Edit</button>
-                  <button className="btn-delete-admin" onClick={() => handleDelete(p._id)}>Delete</button>
-                </div>
-              </td>
+      <div className="admin-table-container">
+        <table className="admin-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Brand</th>
+              <th>Price</th>
+              <th>Concentration</th>
+              <th>Volume</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {perfumes.map((p, i) => (
+              <tr key={p._id}>
+                <td>{i + 1}</td>
+                <td>{p.perfumeName}</td>
+                <td>{p.brand?.brandName}</td>
+                <td>${p.price}</td>
+                <td>{p.concentration}</td>
+                <td>{p.volume}ml</td>
+                <td>
+                  <div className="admin-actions">
+                    <button className="btn-edit" onClick={() => openEdit(p)}>Edit</button>
+                    <button className="btn-delete-admin" onClick={() => handleDelete(p._id)}>Delete</button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       {showModal && (
         <div className="modal-overlay" onClick={() => setShowModal(false)}>

@@ -33,32 +33,34 @@ export default function AdminMembers() {
       <h1>Registered Members</h1>
       {error && <div className="admin-error">{error}</div>}
 
-      <table className="admin-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>YOB</th>
-            <th>Gender</th>
-            <th>Role</th>
-            <th>Joined</th>
-          </tr>
-        </thead>
-        <tbody>
-          {members.map((m, i) => (
-            <tr key={m._id}>
-              <td>{i + 1}</td>
-              <td>{m.name}</td>
-              <td>{m.email}</td>
-              <td>{m.YOB}</td>
-              <td>{m.gender ? "Male" : "Female"}</td>
-              <td>{m.isAdmin ? <span className="badge-yes">Admin</span> : <span className="badge-no">Member</span>}</td>
-              <td>{new Date(m.createdAt).toLocaleDateString()}</td>
+      <div className="admin-table-container">
+        <table className="admin-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>YOB</th>
+              <th>Gender</th>
+              <th>Role</th>
+              <th>Joined</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {members.map((m, i) => (
+              <tr key={m._id}>
+                <td>{i + 1}</td>
+                <td>{m.name}</td>
+                <td>{m.email}</td>
+                <td>{m.YOB}</td>
+                <td>{m.gender ? "Male" : "Female"}</td>
+                <td>{m.isAdmin ? <span className="badge-yes">Admin</span> : <span className="badge-no">Member</span>}</td>
+                <td>{new Date(m.createdAt).toLocaleDateString()}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

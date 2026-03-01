@@ -64,7 +64,7 @@ const seedData = async () => {
   const perfumes = await Perfume.insertMany([
     {
       perfumeName: "Chanel No. 5",
-      uri: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400",
+      uri: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&q=80&w=600",
       price: 150,
       concentration: "EDP",
       description: "A timeless floral aldehyde fragrance that defines elegance and femininity.",
@@ -78,7 +78,7 @@ const seedData = async () => {
     },
     {
       perfumeName: "Dior Sauvage",
-      uri: "https://images.unsplash.com/photo-1594035910387-fbd1a485b12e?w=400",
+      uri: "https://images.unsplash.com/photo-1594035910387-fbd1a485b12e?auto=format&fit=crop&q=80&w=600",
       price: 120,
       concentration: "EDT",
       description: "A bold and fresh fragrance inspired by wide-open spaces under a burning desert sky.",
@@ -92,7 +92,7 @@ const seedData = async () => {
     },
     {
       perfumeName: "Tom Ford Oud Wood",
-      uri: "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=400",
+      uri: "https://images.unsplash.com/photo-1616949113060-3191630c33ee?auto=format&fit=crop&q=80&w=600",
       price: 350,
       concentration: "EDP",
       description: "A rare and exotic blend of oud wood, rosewood, cardamom and Chinese pepper.",
@@ -103,7 +103,7 @@ const seedData = async () => {
     },
     {
       perfumeName: "Gucci Bloom",
-      uri: "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=400",
+      uri: "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?auto=format&fit=crop&q=80&w=600",
       price: 130,
       concentration: "EDP",
       description: "A rich white floral scent created to unfold like its name.",
@@ -114,7 +114,7 @@ const seedData = async () => {
     },
     {
       perfumeName: "Versace Eros",
-      uri: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=400",
+      uri: "https://images.unsplash.com/photo-1557170334-a763171665d0?auto=format&fit=crop&q=80&w=600",
       price: 95,
       concentration: "EDT",
       description: "An invigorating fragrance that embodies strength and passion.",
@@ -125,7 +125,7 @@ const seedData = async () => {
     },
     {
       perfumeName: "YSL Libre",
-      uri: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400",
+      uri: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&q=80&w=600",
       price: 140,
       concentration: "EDP",
       description: "A daring and bold lavender blend that celebrates freedom.",
@@ -136,7 +136,7 @@ const seedData = async () => {
     },
     {
       perfumeName: "Chanel Bleu de Chanel",
-      uri: "https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?w=400",
+      uri: "https://images.unsplash.com/photo-1547887538-e3a2f32cb1cc?auto=format&fit=crop&q=80&w=600",
       price: 160,
       concentration: "Extrait",
       description: "An intensely aromatic woody fragrance that represents the essence of masculine sophistication.",
@@ -146,19 +146,8 @@ const seedData = async () => {
       brand: brands[0]!._id,
     },
     {
-      perfumeName: "Dior J'adore",
-      uri: "https://images.unsplash.com/photo-1615634260167-c8cdede054de?w=400",
-      price: 145,
-      concentration: "Extrait",
-      description: "An absolute femininity in a couture floral bouquet.",
-      ingredients: "Ylang-Ylang, Damascus Rose, Jasmine Sambac, Indian Tuberose",
-      volume: 75,
-      targetAudience: "female",
-      brand: brands[1]!._id,
-    },
-    {
       perfumeName: "Tom Ford Black Orchid",
-      uri: "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=400",
+      uri: "https://images.unsplash.com/photo-1583445013765-48c220019989?auto=format&fit=crop&q=80&w=600",
       price: 280,
       concentration: "Extrait",
       description: "A luxurious and sensual fragrance of rich dark accords and an alluring potion of black orchids.",
@@ -166,6 +155,17 @@ const seedData = async () => {
       volume: 50,
       targetAudience: "unisex",
       brand: brands[2]!._id,
+    },
+    {
+      perfumeName: "Dior Sauvage",
+      uri: "https://images.unsplash.com/photo-1544145945-f904253db0ad?auto=format&fit=crop&q=80&w=600",
+      price: 120,
+      concentration: "EDT",
+      description: "A bold and fresh fragrance inspired by wide-open spaces under a burning desert sky.",
+      ingredients: "Bergamot, Sichuan Pepper, Lavender, Ambroxan, Cedar",
+      volume: 100,
+      targetAudience: "male",
+      brand: brands[1]!._id,
     },
   ]);
 
