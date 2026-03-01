@@ -22,6 +22,7 @@ app.use("/auth", authRoutes);
 app.use("/brands", brandRoutes);
 app.use("/perfumes", perfumeRoutes);
 app.use("/members", memberRoutes);
+app.use("/collectors", memberRoutes);
 app.use("/posts", postRoutes);
 
 // Health check

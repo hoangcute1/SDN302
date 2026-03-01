@@ -1,0 +1,33 @@
+.footer {
+    background: linear-gradient(135deg, #0d0d1f, #1a1a2e);
+    border-top: 1px solid #1f1f3a;
+    padding: 2rem 0;
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    text-align: center;
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #e94560;
+    margin-bottom: 0.5rem;
+}
+
+.footer-logo {
+    font-size: 1.5rem;
+}
+
+.footer-text {
+    color: #666;
+    font-size: 0.85rem;
+}

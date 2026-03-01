@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -29,17 +30,20 @@ function App() {
   return (
     <div className="app">
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/perfumes/:id" element={<PerfumeDetail />} />
-        <Route path="/posts" element={<Posts />} />
-        <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-        <Route path="/admin/brands" element={<AdminRoute><AdminBrands /></AdminRoute>} />
-        <Route path="/admin/perfumes" element={<AdminRoute><AdminPerfumes /></AdminRoute>} />
-        <Route path="/admin/members" element={<AdminRoute><AdminMembers /></AdminRoute>} />
-      </Routes>
+      <main className="main-content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/perfumes/:id" element={<PerfumeDetail />} />
+          <Route path="/posts" element={<Posts />} />
+          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route path="/admin/brands" element={<AdminRoute><AdminBrands /></AdminRoute>} />
+          <Route path="/admin/perfumes" element={<AdminRoute><AdminPerfumes /></AdminRoute>} />
+          <Route path="/admin/members" element={<AdminRoute><AdminMembers /></AdminRoute>} />
+        </Routes>
+      </main>
+      <Footer />
     </div>
   );
 }

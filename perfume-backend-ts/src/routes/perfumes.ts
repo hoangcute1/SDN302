@@ -19,7 +19,7 @@ router.get("/", async (req: Request, res: Response): Promise<void> => {
 
     const perfumes = await Perfume.find(filter)
       .populate("brand", "brandName")
-      .select("perfumeName uri price concentration targetAudience brand")
+      .select("perfumeName uri price concentration targetAudience brand comments")
       .sort({ createdAt: -1 });
 
     res.json(perfumes);
