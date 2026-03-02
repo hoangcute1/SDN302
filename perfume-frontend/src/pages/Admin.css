@@ -210,6 +210,37 @@
   border: 1px solid rgba(233, 69, 96, 0.2);
 }
 
+/* Tabs */
+.admin-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin-tab {
+  padding: 10px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  background: #16162d;
+  color: #888;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: all 0.2s;
+}
+
+.admin-tab:hover {
+  color: #ccc;
+  background: #1e1e3a;
+}
+
+.admin-tab.active {
+  background: #e94560;
+  color: #fff;
+  border-color: #e94560;
+}
+
+/* Badges */
 .badge-yes {
   background: rgba(46, 204, 113, 0.15);
   color: #2ecc71;
@@ -227,6 +258,39 @@
   border-radius: 20px;
   font-size: 0.75rem;
   font-weight: 700;
+}
+
+.badge-pending {
+  background: rgba(243, 156, 18, 0.15);
+  color: #f39c12;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid rgba(243, 156, 18, 0.3);
+}
+
+/* Approve/Reject buttons */
+.btn-approve {
+  background: rgba(46, 204, 113, 0.15);
+  color: #2ecc71;
+  border: 1px solid rgba(46, 204, 113, 0.3);
+}
+
+.btn-approve:hover {
+  background: #2ecc71;
+  color: #fff;
+}
+
+.btn-reject {
+  background: rgba(231, 76, 60, 0.15);
+  color: #e74c3c;
+  border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+.btn-reject:hover {
+  background: #e74c3c;
+  color: #fff;
 }
 
 @media (max-width: 600px) {

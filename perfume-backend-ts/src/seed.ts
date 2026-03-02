@@ -19,8 +19,8 @@ const seedData = async () => {
 
   // Create admin
   const admin = await Member.create({
-    email: "admin@myteam.com",
-    password: "admin123",
+    email: "admin@gmail.com",
+    password: "1",
     name: "Do Nam Trung",
     YOB: 1990,
     gender: true,
@@ -72,6 +72,7 @@ const seedData = async () => {
       volume: 100,
       targetAudience: "female",
       brand: brands[0]!._id,
+      isApproved: true,
       comments: [
         { rating: 3, content: "Absolutely iconic! A must-have.", author: member1._id },
       ],
@@ -86,6 +87,7 @@ const seedData = async () => {
       volume: 100,
       targetAudience: "male",
       brand: brands[1]!._id,
+      isApproved: true,
       comments: [
         { rating: 3, content: "Best office fragrance for men!", author: member2._id },
       ],
@@ -100,6 +102,7 @@ const seedData = async () => {
       volume: 50,
       targetAudience: "unisex",
       brand: brands[2]!._id,
+      isApproved: true,
     },
     {
       perfumeName: "Gucci Bloom",
@@ -111,6 +114,7 @@ const seedData = async () => {
       volume: 100,
       targetAudience: "female",
       brand: brands[3]!._id,
+      isApproved: true,
     },
     {
       perfumeName: "Versace Eros",
@@ -122,6 +126,7 @@ const seedData = async () => {
       volume: 100,
       targetAudience: "male",
       brand: brands[4]!._id,
+      isApproved: true,
     },
     {
       perfumeName: "YSL Libre",
@@ -133,6 +138,7 @@ const seedData = async () => {
       volume: 90,
       targetAudience: "female",
       brand: brands[5]!._id,
+      isApproved: true,
     },
     {
       perfumeName: "Chanel Bleu de Chanel",
@@ -144,6 +150,7 @@ const seedData = async () => {
       volume: 100,
       targetAudience: "male",
       brand: brands[0]!._id,
+      isApproved: true,
     },
     {
       perfumeName: "Tom Ford Black Orchid",
@@ -155,6 +162,7 @@ const seedData = async () => {
       volume: 50,
       targetAudience: "unisex",
       brand: brands[2]!._id,
+      isApproved: true,
     },
     {
       perfumeName: "Dior Sauvage",
@@ -166,12 +174,13 @@ const seedData = async () => {
       volume: 100,
       targetAudience: "male",
       brand: brands[1]!._id,
+      isApproved: true,
     },
   ]);
 
   console.log("Perfumes created:", perfumes.length);
   console.log("\nSeed completed successfully!");
-  console.log("Admin login: admin@myteam.com / admin123");
+  console.log("Admin login: admin@gmail.com / 1");
   console.log("User login: user1@myteam.com / user123");
 
   await mongoose.disconnect();

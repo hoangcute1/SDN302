@@ -20,6 +20,8 @@ export interface IPerfume extends Document {
   targetAudience: string;
   comments: IComment[];
   brand: Types.ObjectId;
+  isApproved: boolean;
+  submittedBy?: Types.ObjectId;
 }
 
 const commentSchema = new Schema<IComment>(
@@ -50,6 +52,12 @@ const perfumeSchema = new Schema<IPerfume>(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Brands",
       required: true,
+    },
+    isApproved: { type: Boolean, default: false },
+    submittedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Members",
+      default: null,
     },
   },
   { timestamps: true }

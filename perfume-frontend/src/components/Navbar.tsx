@@ -37,6 +37,7 @@ export default function Navbar() {
         <Link to="/posts" onClick={closeMenu}>Community</Link>
         {member ? (
           <>
+            <Link to="/submit-perfume" onClick={closeMenu}>Submit Perfume</Link>
             <Link to="/profile" onClick={closeMenu}>Profile</Link>
             {member.isAdmin && (
               <>

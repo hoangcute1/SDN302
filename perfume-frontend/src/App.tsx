@@ -11,6 +11,7 @@ import AdminBrands from "./pages/AdminBrands";
 import AdminPerfumes from "./pages/AdminPerfumes";
 import AdminMembers from "./pages/AdminMembers";
 import Posts from "./pages/Posts";
+import SubmitPerfume from "./pages/SubmitPerfume";
 import "./App.css";
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -37,6 +38,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/perfumes/:id" element={<PerfumeDetail />} />
           <Route path="/posts" element={<Posts />} />
+          <Route path="/submit-perfume" element={<ProtectedRoute><SubmitPerfume /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="/admin/brands" element={<AdminRoute><AdminBrands /></AdminRoute>} />
           <Route path="/admin/perfumes" element={<AdminRoute><AdminPerfumes /></AdminRoute>} />

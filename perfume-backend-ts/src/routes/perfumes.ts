@@ -5,10 +5,20 @@ import { verifyToken, verifyAdmin, optionalAuth } from "../middleware/auth";
 const router = Router();
 
 // GET /perfumes - public, supports search by name and filter by brand
-router.get("/", async (req: Request, res: Response): Promise<void> => {
+// Only returns approved perfumes for public. Admin sees all with ?all=true
+router.get("/", optionalAuth, async (req: Request, res: Response): Promise<void> => {
   try {
-    const { search, brand } = req.query;
+    const { search, brand, all, pending } = req.query;
     const filter: any = {};
+
+    // Admin can request all perfumes or only pending
+    if (req.member?.isAdmin && pending === "true") {
+      filter.isApproved = false;
+    } else if (req.member?.isAdmin && all === "true") {
+      // no filter on isApproved
+    } else {
+      filter.isApproved = true;
+    }
 
     if (search) {
       filter.perfumeName = { $regex: search as string, $options: "i" };
@@ -19,7 +29,8 @@ router.get("/", async (req: Request, res: Response): Promise<void> => {
 
     const perfumes = await Perfume.find(filter)
       .populate("brand", "brandName")
-      .select("perfumeName uri price concentration targetAudience brand comments")
+      .populate("submittedBy", "name email")
+      .select("perfumeName uri price concentration targetAudience brand comments isApproved submittedBy")
       .sort({ createdAt: -1 });
 
     res.json(perfumes);
@@ -46,8 +57,8 @@ router.get("/:perfumeId", async (req: Request, res: Response): Promise<void> => 
   }
 });
 
-// POST /perfumes - admin only
-router.post("/", verifyToken, verifyAdmin, async (req: Request, res: Response): Promise<void> => {
+// POST /perfumes - admin creates (auto-approved), user submits (pending approval)
+router.post("/", verifyToken, async (req: Request, res: Response): Promise<void> => {
   try {
     const {
       perfumeName, uri, price, concentration,
@@ -57,11 +68,49 @@ router.post("/", verifyToken, verifyAdmin, async (req: Request, res: Response): 
     const perfume = new Perfume({
       perfumeName, uri, price, concentration,
       description, ingredients, volume, targetAudience, brand,
+      isApproved: req.member!.isAdmin ? true : false,
+      submittedBy: req.member!._id,
     });
 
     await perfume.save();
     const populated = await perfume.populate("brand", "brandName");
     res.status(201).json(populated);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// PATCH /perfumes/:perfumeId/approve - admin only, approve a pending perfume
+router.patch("/:perfumeId/approve", verifyToken, verifyAdmin, async (req: Request, res: Response): Promise<void> => {
+  try {
+    const perfume = await Perfume.findByIdAndUpdate(
+      req.params.perfumeId,
+      { isApproved: true },
+      { new: true }
+    ).populate("brand", "brandName").populate("submittedBy", "name email");
+
+    if (!perfume) {
+      res.status(404).json({ message: "Perfume not found." });
+      return;
+    }
+
+    res.json(perfume);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// PATCH /perfumes/:perfumeId/reject - admin only, delete a pending perfume
+router.patch("/:perfumeId/reject", verifyToken, verifyAdmin, async (req: Request, res: Response): Promise<void> => {
+  try {
+    const perfume = await Perfume.findByIdAndDelete(req.params.perfumeId);
+
+    if (!perfume) {
+      res.status(404).json({ message: "Perfume not found." });
+      return;
+    }
+
+    res.json({ message: "Perfume rejected and removed." });
   } catch (error: any) {
     res.status(500).json({ message: error.message });
   }

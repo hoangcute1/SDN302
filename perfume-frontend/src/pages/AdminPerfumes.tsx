@@ -18,6 +18,8 @@ interface Perfume {
   volume: number;
   targetAudience: string;
   brand: Brand;
+  isApproved: boolean;
+  submittedBy?: { _id: string; name: string; email: string } | null;
 }
 
 const emptyForm = {
@@ -39,10 +41,13 @@ export default function AdminPerfumes() {
   const [editing, setEditing] = useState<Perfume | null>(null);
   const [form, setForm] = useState({ ...emptyForm });
   const [error, setError] = useState("");
+  const [tab, setTab] = useState<"all" | "pending">("all");
 
   const fetchPerfumes = async () => {
     try {
-      const res = await api.get("/perfumes");
+      const params: any = { all: "true" };
+      if (tab === "pending") params.pending = "true";
+      const res = await api.get("/perfumes", { params });
       setPerfumes(res.data);
     } catch (err) {
       console.error(err);
@@ -61,7 +66,7 @@ export default function AdminPerfumes() {
   useEffect(() => {
     fetchPerfumes();
     fetchBrands();
-  }, []);
+  }, [tab]);
 
   const openCreate = () => {
     setEditing(null);
@@ -112,12 +117,40 @@ export default function AdminPerfumes() {
     }
   };
 
+  const handleApprove = async (id: string) => {
+    try {
+      await api.patch(`/perfumes/${id}/approve`);
+      fetchPerfumes();
+    } catch (err: any) {
+      alert(err.response?.data?.message || "Failed to approve");
+    }
+  };
+
+  const handleReject = async (id: string) => {
+    if (!confirm("Reject and delete this perfume submission?")) return;
+    try {
+      await api.patch(`/perfumes/${id}/reject`);
+      fetchPerfumes();
+    } catch (err: any) {
+      alert(err.response?.data?.message || "Failed to reject");
+    }
+  };
+
   return (
     <div className="admin-page">
       <h1>
         Manage Perfumes
         <button onClick={openCreate}>+ Add Perfume</button>
       </h1>
+
+      <div className="admin-tabs">
+        <button className={`admin-tab ${tab === "all" ? "active" : ""}`} onClick={() => setTab("all")}>
+          All Perfumes
+        </button>
+        <button className={`admin-tab ${tab === "pending" ? "active" : ""}`} onClick={() => setTab("pending")}>
+          ⏳ Pending Approval
+        </button>
+      </div>
 
       <div className="admin-table-container">
         <table className="admin-table">
@@ -128,7 +161,8 @@ export default function AdminPerfumes() {
               <th>Brand</th>
               <th>Price</th>
               <th>Concentration</th>
-              <th>Volume</th>
+              <th>Status</th>
+              <th>Submitted By</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -140,9 +174,22 @@ export default function AdminPerfumes() {
                 <td>{p.brand?.brandName}</td>
                 <td>${p.price}</td>
                 <td>{p.concentration}</td>
-                <td>{p.volume}ml</td>
+                <td>
+                  {p.isApproved ? (
+                    <span className="badge-yes">Approved</span>
+                  ) : (
+                    <span className="badge-pending">Pending</span>
+                  )}
+                </td>
+                <td>{p.submittedBy?.name || "—"}</td>
                 <td>
                   <div className="admin-actions">
+                    {!p.isApproved && (
+                      <>
+                        <button className="btn-approve" onClick={() => handleApprove(p._id)}>✓ Approve</button>
+                        <button className="btn-reject" onClick={() => handleReject(p._id)}>✗ Reject</button>
+                      </>
+                    )}
                     <button className="btn-edit" onClick={() => openEdit(p)}>Edit</button>
                     <button className="btn-delete-admin" onClick={() => handleDelete(p._id)}>Delete</button>
                   </div>
