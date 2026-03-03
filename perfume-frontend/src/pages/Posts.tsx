@@ -193,7 +193,7 @@ export default function Posts() {
 
   const canEditDelete = (post: Post) => {
     if (!member) return false;
-    return member.isAdmin || member._id === post.author._id;
+    return member.isAdmin || member._id === post.author?._id;
   };
 
   return (
@@ -238,7 +238,7 @@ export default function Posts() {
                 )}
               </div>
               <div className="post-meta">
-                By <strong>{post.author?.name}</strong> • {new Date(post.createdAt).toLocaleDateString()}
+                By <strong>{post.author?.name || "Unknown"}</strong> • {new Date(post.createdAt).toLocaleDateString()}
                 {post.perfume && <span className="post-perfume-tag">🌸 {post.perfume.perfumeName}</span>}
               </div>
               {post.image && (
