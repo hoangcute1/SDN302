@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import api from "../api";
 
 interface Member {
   _id: string;
@@ -25,6 +26,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return stored ? JSON.parse(stored) : null;
   });
   const [token, setToken] = useState<string | null>(() => localStorage.getItem("token"));
+
+  // Fetch latest profile from server when app loads
+  useEffect(() => {
+    if (!token) return;
+    api.get("/auth/profile")
+      .then((res) => {
+        const fresh = res.data;
+        localStorage.setItem("member", JSON.stringify(fresh));
+        setMember(fresh);
+      })
+      .catch(() => {
+        // Token expired or invalid — log out
+        localStorage.removeItem("token");
+        localStorage.removeItem("member");
+        setToken(null);
+        setMember(null);
+      });
+  }, [token]);
 
   const login = (token: string, member: Member) => {
     localStorage.setItem("token", token);

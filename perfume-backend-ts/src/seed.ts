@@ -21,7 +21,7 @@ const seedData = async () => {
   const admin = await Member.create({
     email: "admin@gmail.com",
     password: "1",
-    name: "Do Nam Trung",
+    name: "Admin",
     YOB: 1990,
     gender: true,
     isAdmin: true,
